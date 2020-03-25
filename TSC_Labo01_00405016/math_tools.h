@@ -1,15 +1,3 @@
-//
-//  math_tools.h
-//  TSC_Labo01_00405016
-//
-//  Created by Mario Muñoz on 3/25/20.
-//  Copyright © 2020 Mario Muñoz. All rights reserved.
-//
-
-#ifndef math_tools_h
-#define math_tools_h
-
-  
 #include <vector>
 #include "math.h"
 #include "stdlib.h"
@@ -29,6 +17,13 @@ void zeroes(Vector &v,int n){
 void zeroes(Matrix &M,int n){
     for(int i=0;i<n;i++){
         vector<float> row(n,0.0);
+        M.push_back(row);
+    }
+}
+
+void zeroes(Matrix &M,int n, int m){
+    for(int i=0;i<n;i++){
+        vector<float> row(m,0.0);
         M.push_back(row);
     }
 }
@@ -141,4 +136,15 @@ void transpose(Matrix M, Matrix &T){
             T.at(j).at(i) = M.at(i).at(j);
 }
 
-#endif /* math_tools_h */
+
+void inverseM(Matrix M, Matrix &Minv){
+    if (determinant(M) == 0){
+        exit(EXIT_FAILURE);
+    }
+
+    Matrix cofM, cofMTrans;
+    cofactors(M, cofM);
+    transpose(cofM, cofMTrans);
+    productRealMatrix(1.0/determinant(M), cofMTrans, Minv);
+}
+

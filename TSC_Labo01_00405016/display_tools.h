@@ -17,11 +17,12 @@ void showVector(Vector b){
     cout << "]\n";
 }
 
+//cambio a show matrix, para que imprima valores a dos decimales.
 void showMatrix(Matrix K){
     for(int i=0;i<K.at(0).size();i++){
         cout << "[\t";
         for(int j=0;j<K.size();j++){
-            cout << K.at(i).at(j) << "\t";
+            cout << roundf(K.at(i).at(j)*100)/100 << "\t";
         }
         cout << "]\n";
     }
